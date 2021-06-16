@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- 
+	빈(Bean) : ApplicationContext가 관리하는 객체들
+ -->
+<bean id="desk" class="core.test1.Desk">
+	<!-- setLeg()에 id가 "leg"인 reference를 matching -->
+	<property name="leg" ref="leg"></property>
+</bean>
+
+<bean id="leg" class="core.test1.Leg"></bean>
+
+<bean id="chair" class="core.test1.Chair">
+	<constructor-arg ref="leg"></constructor-arg>
+</bean>
+
+</beans>
