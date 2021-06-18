@@ -18,7 +18,7 @@
 <!-- Font Awesome (css ver.)-->
 <!-- link href="${pageContext.request.contextPath }/res/css/all.css" rel="stylesheet"-->
 
-<script src="${pageContext.request.contextPath }/res/js/all.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/all.js"></script>
 	
 <!-- Google Font -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
