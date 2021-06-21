@@ -119,7 +119,7 @@ public class SampleController {
 	}
 	
 	@GetMapping("/ex04")
-	public String ex04(SampleDTO dto, int page) {
+	public String ex04(SampleDTO dto, @RequestParam (required = false, defaultValue = "0") int page) {
 		
 		log.info("dto : " + dto);
 		log.info("page : " + page);
