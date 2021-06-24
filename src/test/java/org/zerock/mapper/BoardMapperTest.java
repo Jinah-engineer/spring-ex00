@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.zerock.domain.BoardVO;
+import org.zerock.domain.Criteria;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -87,9 +88,9 @@ public class BoardMapperTest {
 	
 	@Test
 	public void testDelete() {
-		int cnt = mapper.delete(0);
+		int cnt = mapper.delete(5);
 		
-		assertEquals(0, cnt);
+		assertEquals(1, cnt);
 		
 //		cnt = mapper.delete(13);
 //		assertEquals(1, cnt);
@@ -124,5 +125,13 @@ public class BoardMapperTest {
 		assertEquals(board.getTitle(), board3.getTitle());
 		assertEquals(board.getContent(), board3.getContent());
 		assertEquals(board.getWriter(), board3.getWriter());
+	}
+	
+	@Test
+	public void testPaging() {
+		Criteria cri = new Criteria();
+		List<BoardVO> list = mapper.getListWithPaging(cri);
+		
+		assertEquals(10, list.size());
 	}
 }

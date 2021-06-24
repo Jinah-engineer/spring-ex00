@@ -13,14 +13,34 @@
 
 <meta charset="UTF-8">
 <title>views - list JSP File</title>
+
+<script>
+	$(document).ready(function () {
+		$("#list-pagination1 a").click(function(e) {
+			// 기본 액션 중지 (hyperlink 역할 안함)
+			e.preventDefault();
+			
+			console.log("a요소 클릭됨");
+			
+			var actionForm = $("#actionForm");
+			
+			// form의 pageNum input의 값을 a 요소의 href 값으로 변경
+			actionForm.find("[name=pageNum]").val($(this).attr("href"));
+			
+			// submit 하기
+			actionForm.submit();
+		});
+	});
+</script>
+
 </head>
 <body>
 	<bd:navbar />
-	
+
 	<div class="container">
-		
+
 		<h1>${result }</h1>
-		
+
 		<h1>글 목록</h1>
 		<table class="table table-striped">
 			<thead>
@@ -36,21 +56,56 @@
 				<c:forEach items="${list }" var="board">
 					<tr>
 						<td>${board.bno }</td>
-						<td>
-							<a href="${appRoot}/board/get?bno=${board.bno}">
-							${board.title }</a>
-						</td>
+
+						<td><c:url value="/board/get" var="getUrl">
+								<c:param name="bno" value="${board.bno }" />
+								<c:param name="pageNum" value="${pageMaker.cri.pageNum }" />
+								<c:param name="amount" value="${pageMaker.cri.amount }" />
+							</c:url> <a href="${getUrl }">${board.title }</a></td>
+							
 						<td>${board.writer }</td>
-						<td>
-							<fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate }" />
-						</td>
-						<td>
-							<fmt:formatDate pattern="yyyy-MM-dd" value="${board.updateDate }" />
-						</td>
+						
+						<td><fmt:formatDate pattern="yyyy-MM-dd"
+								value="${board.regdate }" /></td>
+								
+						<td><fmt:formatDate pattern="yyyy-MM-dd"
+								value="${board.updateDate }" /></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
+
+
+		<!--  pagination -->
+		<div>
+			<nav aria-label="Page navigation example">
+				<ul id="list-pagination1" class="pagination justify-content-center">
+
+					<c:if test="${pageMaker.prev }">
+						<li class="page-item"><a class="page-link" href="${pageMaker.startPage - 1 }">Previous</a>
+						</li>
+					</c:if>
+
+					<c:forEach begin="${pageMaker.startPage }"
+						end="${pageMaker.endPage }" var="num">
+						<li class="page-item"><a class="page-link" href="${num }">${num }</a></li>
+					</c:forEach>
+
+					<c:if test="${pageMaker.next }">
+						<li class="page-item"><a class="page-link" href="${pageMaker.endPage + 1 }">Next</a>
+						</li>
+					</c:if>
+				</ul>
+			</nav>
+
+			<div style="display: none">
+				<form id="actionForm" action="${appRoot }/board/list" method="get">
+					<input name="pageNum" value="${pageMaker.cri.pageNum }" /> <input
+						name="amount" value="${pageMaker.cri.amount }" />
+				</form>
+			</div>
+
+		</div>
 	</div>
 
 	<c:if test="${not empty result }">

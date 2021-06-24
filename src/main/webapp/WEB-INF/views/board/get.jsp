@@ -40,6 +40,12 @@
 					</div>
 					<input class="btn btn-primary" type="submit" value="작성" />
 					
+					<c:url value="/board/modify" var="modifyUrl">
+						<c:param name="bno" value="${board.bno }" />
+						<c:param name="pageNum" value="${cri.pageNum }" />
+						<c:param name="amount" value="${cri.amount }" />
+					</c:url>
+					
 					<a class="btn btn-secondary" href="${appRoot }/board/modify?bno=${board.bno}">수정/삭제</a>
 				</form>
 			</div>
