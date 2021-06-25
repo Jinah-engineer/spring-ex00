@@ -61,7 +61,10 @@
 								<c:param name="bno" value="${board.bno }" />
 								<c:param name="pageNum" value="${pageMaker.cri.pageNum }" />
 								<c:param name="amount" value="${pageMaker.cri.amount }" />
-							</c:url> <a href="${getUrl }">${board.title }</a></td>
+								<c:param name="type" value="${pageMaker.cri.type }" />
+								<c:param name="keyword" value="${pageMaker.cri.keyword }" />
+							</c:url> 
+						<a href="${getUrl }">${board.title }</a></td>
 							
 						<td>${board.writer }</td>
 						
@@ -88,7 +91,7 @@
 
 					<c:forEach begin="${pageMaker.startPage }"
 						end="${pageMaker.endPage }" var="num">
-						<li class="page-item"><a class="page-link" href="${num }">${num }</a></li>
+						<li class="page-item ${num == cri.pageNum ? 'active' : '' }"><a class="page-link" href="${num }">${num }</a></li>
 					</c:forEach>
 
 					<c:if test="${pageMaker.next }">
@@ -97,14 +100,16 @@
 					</c:if>
 				</ul>
 			</nav>
-
+			
+			<%-- Form for Page Link --%>
 			<div style="display: none">
 				<form id="actionForm" action="${appRoot }/board/list" method="get">
-					<input name="pageNum" value="${pageMaker.cri.pageNum }" /> <input
-						name="amount" value="${pageMaker.cri.amount }" />
+					<input name="pageNum" value="${cri.pageNum }" /> 
+					<input name="amount" value="${cri.amount }" />
+					<input name="type" value="${cri.type }" />
+					<input name="keyword" value="${cri.keyword }" />
 				</form>
 			</div>
-
 		</div>
 	</div>
 

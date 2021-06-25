@@ -86,26 +86,26 @@ public class BoardMapperTest {
 		assertEquals(key, newBoard.getBno());
 	}
 	
-	@Test
-	public void testDelete() {
-		int cnt = mapper.delete(5);
-		
-		assertEquals(1, cnt);
-		
-//		cnt = mapper.delete(13);
+//	@Test
+//	public void testDelete() {
+//		int cnt = mapper.delete(5);
+//		
 //		assertEquals(1, cnt);
-		
-		BoardVO board = new BoardVO();
-		
-		board.setTitle("title");
-		board.setContent("content");
-		board.setWriter("writer");
-		
-		mapper.insertSelectKey(board);
-		
-		mapper.delete(board.getBno());
-		assertEquals(1, cnt);
-	}
+//		
+////		cnt = mapper.delete(13);
+////		assertEquals(1, cnt);
+//		
+//		BoardVO board = new BoardVO();
+//		
+//		board.setTitle("title");
+//		board.setContent("content");
+//		board.setWriter("writer");
+//		
+//		mapper.insertSelectKey(board);
+//		
+//		mapper.delete(board.getBno());
+//		assertEquals(1, cnt);
+//	}
 	
 	@Test
 	public void testUpdate() {
@@ -133,5 +133,15 @@ public class BoardMapperTest {
 		List<BoardVO> list = mapper.getListWithPaging(cri);
 		
 		assertEquals(10, list.size());
+	}
+	
+	@Test
+	public void testSearch() {
+		Criteria cri = new Criteria();
+		
+		cri.setType("TC");
+		cri.setKeyword("테스트");
+		
+		mapper.getListWithPaging(cri);
 	}
 }

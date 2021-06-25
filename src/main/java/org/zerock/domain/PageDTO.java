@@ -35,7 +35,7 @@ public class PageDTO {
 		// 가장 마지막 페이지
 		int realEnd = total / numPerPage;
 		
-		if (total % numPerPage == 0) {
+		if (total % numPerPage != 0) {
 			realEnd = realEnd + 1;
 		}
 		

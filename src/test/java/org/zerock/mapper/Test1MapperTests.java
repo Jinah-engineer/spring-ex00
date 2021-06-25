@@ -18,7 +18,7 @@ import lombok.Setter;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
-public class Test1Tests {
+public class Test1MapperTests {
 
 	@Setter(onMethod_ = @Autowired)
 	private Test1Mapper mapper;
