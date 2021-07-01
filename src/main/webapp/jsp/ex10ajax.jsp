@@ -103,7 +103,7 @@
 		<table id="table1" class="table">
 			<thead>
 				<tr>
-					<th>ID</th>
+					<th>ID</th>                                              
 					<th>AGE</th>
 				</tr>
 			</thead>

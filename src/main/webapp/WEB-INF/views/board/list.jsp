@@ -64,7 +64,12 @@
 								<c:param name="type" value="${pageMaker.cri.type }" />
 								<c:param name="keyword" value="${pageMaker.cri.keyword }" />
 							</c:url> 
-						<a href="${getUrl }">${board.title }</a></td>
+						<a href="${getUrl }">${board.title }
+							<c:if test="${board.replyCnt > 0 }">
+								[${board.replyCnt }]
+							</c:if>
+						</a>
+						</td>
 							
 						<td>${board.writer }</td>
 						
@@ -128,7 +133,7 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title">등록이 완료되었습니다 :-)</h5>
+						<h5 class="modal-title">${messageTitle }</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
