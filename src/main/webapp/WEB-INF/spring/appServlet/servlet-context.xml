@@ -20,9 +20,12 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- File Uploading -->	
+	<beans:bean id="multipartResolver" 
+	class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+	</beans:bean>
 	
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	<context:component-scan base-package="org.zerock.controller" />
-	
 	
 </beans:beans>
