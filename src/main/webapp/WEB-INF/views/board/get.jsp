@@ -41,6 +41,15 @@
 						<label for="textarea1">내용</label>
 						<textarea readonly="readonly" class="form-control" name="content"><c:out
 								value="${board.content }"></c:out></textarea>
+								
+					<!-- Image File Upload -->
+					<c:if test="${not empty board.fileName }">
+						<div>
+							<img class="img-fluid" 
+							src="${imgRoot }${board.bno }/${board.fileName}">
+						</div>
+					</c:if>
+								
 					</div>
 					<div class="form-group">
 						<label for="input2">작성자</label> <input readonly="readonly"

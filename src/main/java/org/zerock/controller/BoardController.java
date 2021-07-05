@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.BoardVO;
 import org.zerock.domain.Criteria;
@@ -55,10 +56,14 @@ public class BoardController {
 	}
 	
 	@PostMapping("/register")
-	public String register(BoardVO board, RedirectAttributes rttr) {
+	public String register(BoardVO board, 
+							@RequestParam("file") MultipartFile file, 
+							RedirectAttributes rttr) {
+		
+		board.setFileName(file.getOriginalFilename());
 		
 		// service에게 등록 업무 시키고
-		service.register(board); // title, content, writer
+		service.register(board, file); // title, content, writer
 		
 		rttr.addFlashAttribute("result", board.getBno());  
 		rttr.addFlashAttribute("messageTitle", "등록 완료 :-)");
@@ -87,11 +92,13 @@ public class BoardController {
 	@PostMapping("/modify")
 	public String modify(BoardVO board, 
 						Criteria cri, 
+						@RequestParam("file") MultipartFile file,
 						RedirectAttributes rttr) {
+		
 		// request parameter 수집 - method parameter에 넣으면 자동으로 처리됨
 		
 		// service 일 시키고
-		boolean success = service.modify(board);
+		boolean success = service.modify(board, file);
 		
 		// 결과를 모델 or FlashMap에 넣고
 		if (success) {
