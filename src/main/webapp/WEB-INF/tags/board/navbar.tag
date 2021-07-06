@@ -4,22 +4,26 @@
 
 <!-- Board List -->
 <c:url value="/board/list" var="listUrl">
-	<c:if test="${not empty cri }">
+	<c:if test="${not empty cri.pageNum }">
 		<c:param name="pageNum" value="${cri. pageNum }"></c:param>
+	</c:if>
+	<c:if test="${not empty cri.amount }">
+	</c:if>
 		<c:param name="amount" value="${cri.amount }"></c:param>
 		<c:param name="keyword" value="${cri.keyword }"></c:param>
 		<c:param name="type" value="${cri.type }"></c:param>
-	</c:if>
 </c:url>
 
 <!-- Board Writing -->
 <c:url value="/board/register" var="registerUrl">
-	<c:if test="${not empty cri }">
+	<c:if test="${not empty cri.pageNum }">
 		<c:param name="pageNum" value="${cri.pageNum }"></c:param>
+	</c:if>
+	<c:if test="${not empty cri.amount }">
 		<c:param name="amount" value="${cri.amount }"></c:param>
+	</c:if>
 		<c:param name="keyword" value="${cri.keyword }"></c:param>
 		<c:param name="type" value="${cri.type }"></c:param>
-	</c:if>
 </c:url>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -39,6 +43,15 @@
        <li class="nav-item">
         <a class="nav-link" href="${registerUrl }">글쓰기</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="${appRoot }/secure/all">모두</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="${appRoot }/secure/member">멤버(member)만</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="${appRoot }/secure/admin">어드민(admin)만</a>
+      </li>
       <!-- <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Dropdown
@@ -52,6 +65,10 @@
       </li> -->
     </ul>
   </div>
+  
+	<form action="${appRoot }/logout" method="post">
+		<input type="submit" class="btn btn-outline-secondary" value="로그아웃">
+	</form>
   
     <form action="${listUrl }" method="get" class="form-inline my-2 my-lg-0">
    	  <select name="type" class="form-control mr-sm-2">
