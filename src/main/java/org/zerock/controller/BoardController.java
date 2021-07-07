@@ -3,6 +3,7 @@ package org.zerock.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.ui.Model;
@@ -37,8 +38,7 @@ public class BoardController {
 //	}
 	
 	// Get 방식, 경로는 /list
-	@GetMapping("/list")
-	public void list(@ModelAttribute("cri") Criteria cri, Model model) {
+	@GetMapping("/list")public void list(@ModelAttribute("cri") Criteria cri, Model model) {
 		log.info("board/list method.............");
 		
 		int total = service.getTotal(cri);
@@ -90,6 +90,8 @@ public class BoardController {
 	}
 	
 	@PostMapping("/modify")
+	@PreAuthorize("principal.username == #board.writer") // spring book 720 page
+//	@PreAuthorize("authication.name == #board.writer") // spring.io
 	public String modify(BoardVO board, 
 						Criteria cri, 
 						@RequestParam("file") MultipartFile file,
@@ -117,9 +119,11 @@ public class BoardController {
 	}
 	
 	@PostMapping("/remove")
+	@PreAuthorize("principal.username == #writer")
 	public String remove(@RequestParam("bno") Long bno,
 						Criteria cri,
-						RedirectAttributes rttr) {
+						RedirectAttributes rttr,
+						String writer) {
 		// parameter 수집
 		
 		
@@ -143,6 +147,7 @@ public class BoardController {
 	}
 	
 	@GetMapping("/register")
+	@PreAuthorize("isAuthenticated()")
 	public void register(@ModelAttribute("cri") Criteria cri) {
 		// Forwarding to /WEB-INF/views/board/register.jsp
 		

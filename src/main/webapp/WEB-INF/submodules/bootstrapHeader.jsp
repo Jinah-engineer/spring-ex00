@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <meta charset="UTF-8">
 <meta name="viewport"
@@ -18,8 +19,12 @@
 <!-- Font Awesome (css ver.)-->
 <!-- link href="${pageContext.request.contextPath }/res/css/all.css" rel="stylesheet"-->
 
-<script src="${pageContext.request.contextPath }/resources/js/all.js"></script>
-	
+<script defer src="${pageContext.request.contextPath }/resources/js/all.js"></script>
+
+<%--Security Info --%>
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="pinfo" scope="request" />
+</sec:authorize>
 <!-- Google Font -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Stylish&display=swap" rel="stylesheet">

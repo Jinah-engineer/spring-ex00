@@ -1,6 +1,7 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec"	 uri="http://www.springframework.org/security/tags" %>
 
 <!-- Board List -->
 <c:url value="/board/list" var="listUrl">
@@ -8,8 +9,8 @@
 		<c:param name="pageNum" value="${cri. pageNum }"></c:param>
 	</c:if>
 	<c:if test="${not empty cri.amount }">
-	</c:if>
 		<c:param name="amount" value="${cri.amount }"></c:param>
+	</c:if>
 		<c:param name="keyword" value="${cri.keyword }"></c:param>
 		<c:param name="type" value="${cri.type }"></c:param>
 </c:url>
@@ -35,14 +36,18 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Main<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="${appRoot }/member/login">Main<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="${listUrl }">게시글 보기</a>
       </li>
-       <li class="nav-item">
-        <a class="nav-link" href="${registerUrl }">글쓰기</a>
-      </li>
+      
+      <sec:authorize access="isAuthenticated()">
+	       <li class="nav-item">
+	        <a class="nav-link" href="${registerUrl }">글쓰기</a>
+	      </li>
+      </sec:authorize>
+      
       <li class="nav-item">
         <a class="nav-link" href="${appRoot }/secure/all">모두</a>
       </li>
@@ -66,9 +71,11 @@
     </ul>
   </div>
   
-	<form action="${appRoot }/logout" method="post">
-		<input type="submit" class="btn btn-outline-secondary" value="로그아웃">
-	</form>
+  	<sec:authorize access="isAuthenticated()">
+		<form action="${appRoot }/logout" method="post">
+			<input type="submit" class="btn btn-outline-secondary" value="로그아웃">
+		</form>
+  	</sec:authorize>
   
     <form action="${listUrl }" method="get" class="form-inline my-2 my-lg-0">
    	  <select name="type" class="form-control mr-sm-2">
@@ -90,3 +97,10 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
 </nav>
+    
+
+     
+     
+     
+     
+    

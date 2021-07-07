@@ -54,6 +54,7 @@
     	b.updatedate updateDate,
     	count(r.rno) replyCnt
      FROM tbl_board b LEFT JOIN tbl_reply r ON b.bno = r.bno
+     					   JOIN tbl_member m ON b.writer = m.userid
 
 	<include refid="criteria"></include>
 	 GROUP BY b.bno
@@ -85,10 +86,12 @@
   		b.writer writer,
   		b.regdate regdate,
   		b.updatedate updateDate,
-  		f.fileName fileName
+  		f.fileName fileName,
+  		m.userName writerName
   		
   	FROM tbl_board b
   	LEFT JOIN tbl_board_file f 
+  		 JOIN tbl_member m ON b.writer = m.userid
   	ON b.bno = f.bno
   	
   	WHERE b.bno = #{bno}
