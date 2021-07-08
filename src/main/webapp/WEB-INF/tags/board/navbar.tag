@@ -15,6 +15,28 @@
 		<c:param name="type" value="${cri.type }"></c:param>
 </c:url>
 
+<c:url value="/member/signup" var="signUpUrl">
+	<c:if test="${not empty cri.pageNum }">
+		<c:param name="pageNum" value="${cri. pageNum }"></c:param>
+	</c:if>
+	<c:if test="${not empty cri.amount }">
+		<c:param name="amount" value="${cri.amount }"></c:param>
+	</c:if>
+		<c:param name="keyword" value="${cri.keyword }"></c:param>
+		<c:param name="type" value="${cri.type }"></c:param>
+</c:url>
+
+<c:url value="/member/info" var="memberInfoUrl">
+	<c:if test="${not empty cri.pageNum }">
+		<c:param name="pageNum" value="${cri. pageNum }"></c:param>
+	</c:if>
+	<c:if test="${not empty cri.amount }">
+		<c:param name="amount" value="${cri.amount }"></c:param>
+	</c:if>
+		<c:param name="keyword" value="${cri.keyword }"></c:param>
+		<c:param name="type" value="${cri.type }"></c:param>
+</c:url>
+
 <!-- Board Writing -->
 <c:url value="/board/register" var="registerUrl">
 	<c:if test="${not empty cri.pageNum }">
@@ -48,7 +70,7 @@
 	      </li>
       </sec:authorize>
       
-      <li class="nav-item">
+     <%--  <li class="nav-item">
         <a class="nav-link" href="${appRoot }/secure/all">모두</a>
       </li>
       <li class="nav-item">
@@ -56,20 +78,26 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="${appRoot }/secure/admin">어드민(admin)만</a>
-      </li>
-      <!-- <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li> -->
+      </li> --%>
+      
+      <sec:authorize access="!isAuthenticated()">
+      	<li class="nav-item">
+      		<a class="nav-link" href="${signUpUrl }">회원가입</a>
+      	</li>
+      </sec:authorize>
+      
+      <sec:authorize access="isAuthenticated()">
+      	<li class="nav-item">
+      		<a class="nav-link" href="${memberInfoUrl }">회원정보</a>
+      	</li>
+      </sec:authorize>
     </ul>
   </div>
+  
+	  <sec:authorize access="!isAuthenticated()">
+		<a href="${appRoot }/member/login" class="btn btn-outline-primary">로그인</a>  
+	  </sec:authorize>
+	  
   
   	<sec:authorize access="isAuthenticated()">
 		<form action="${appRoot }/logout" method="post">

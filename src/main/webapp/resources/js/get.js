@@ -9,8 +9,8 @@
 				success: function (reply) {
 					$("#reply-rno-input2").val(reply.rno);
 					$("#reply-replyer-input2").val(reply.replyer);
+					$("#reply-replyerName-input2").val(reply.replyerName);
 					$("#reply-reply-textarea2").text(reply.reply);
-					$("#reply-modify-modal").modal("show");
 
 
 					// 댓글 작성자와 로그인 유저가 같지 않으면 수정, 삭제 버튼 삭제
@@ -40,7 +40,7 @@
 			for (var reply of list) {
 				var replyHTML = `<li class="media" id="${reply.rno}" data-rno="${reply.rno}">
 										<div class="media-body">
-											<h5 class="my-4">${reply.replyer}</h5>
+											<h5 class="my-4">${reply.replyerName}</h5>
 											<p>${reply.reply}</p>
 											<small>${new Date(reply.replyDate).toISOString().split("T")[0]}</small>
 										</div>
@@ -94,7 +94,7 @@
 		getReplyList();
 		
 		// 댓글 입력 버튼 처리
-		$("#reply-submit-btn1").click(function () {
+		$("#reply-insert-btn1").click(function () {
 			var bno = $("#reply-bno-input1").val();
 			var replyer = $("#reply-replyer-input1").val();
 			var reply = $("#reply-reply-textarea1").val();

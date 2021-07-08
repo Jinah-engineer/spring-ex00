@@ -9,12 +9,14 @@ import org.springframework.security.core.userdetails.User;
 import org.zerock.domain.MemberVO;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
 public class CustomUser extends User{
 
 	@Getter
+	@Setter
 	private MemberVO member;
 	
 	public CustomUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {

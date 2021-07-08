@@ -93,5 +93,14 @@ public class MemberMapperTests {
 		assertEquals("member", vo.getUserid());
 		assertTrue(encoder.matches("member", vo.getUserpw()));
 	}
-	
+
+	@Test
+	public void testUpdate() {
+		MemberVO vo = mapper.read("newid");
+		
+		String newpw = "111";
+		vo.setUserpw(encoder.encode(newpw));
+		
+		assertEquals(1, mapper.update(vo));
+	}
 }

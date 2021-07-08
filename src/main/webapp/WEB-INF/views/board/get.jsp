@@ -108,7 +108,8 @@
           <input type="text" value="${board.bno }" readonly hidden id="reply-bno-input1">
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">작성자</label>
-            <input type="text" class="form-control" id="reply-replyer-input1">
+            <input type="text" readonly value="${pinfo.member.userName }" class="form-control"/>
+            <input type="hidden" value="${pinfo.member.userid }" class="form-control" id="reply-replyer-input1">
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">댓글</label>
@@ -145,8 +146,9 @@
 							<input type="text" value="${board.bno }" readonly hidden
 								id="reply-bno-input1">
 							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">작성자</label> <input
-									type="text" class="form-control" id="reply-replyer-input2" readonly>
+								<label for="recipient-name" class="col-form-label">작성자</label> 
+								<input id="reply-replyerName-input2" class="form-control" type="text" readonly />
+								<input type="hidden" class="form-control" id="reply-replyer-input2" readonly>
 							</div>
 							<div class="form-group">
 								<label for="message-text" class="col-form-label">댓글</label>
